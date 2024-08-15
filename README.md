@@ -91,9 +91,13 @@ Each test case is documented with the following details:
 - **Test Steps:**
   1. Navigate to Hacker News Homepage.
   2. Locate the "new" link in the navigation bar and click on it to access the 'New' page, where articles are displayed in reverse chronological order
-  3. Verify that the first 30 articles displayed are sorted from newest to oldest by comparing the timestamps or identifiers associated with each article.
-  4. Scroll to the bottom of the page and click on the "More" button to load the next set of articles. Repeat this action until 100 articles have been loaded.
-  5. Confirm that the entire list of the first 100 articles remains sorted from newest to oldest after loading additional articles.
+  3. Verify the newest articles page has loaded:
+  - Check if title element is present
+  - Check if  at least one article has loaded
+  - Check if the "More" link is present
+  4. Verify that the first 30 articles displayed are sorted from newest to oldest by comparing the timestamps or identifiers associated with each article.
+  5. Scroll to the bottom of the page and click on the "More" button to load the next set of articles. Repeat this action until 100 articles have been loaded.
+  6. Confirm that the entire list of the first 100 articles remains sorted from newest to oldest after loading additional articles.
 - **Expected Result:** 
   - The first 100 articles on the 'New' page should be displayed in descending order, from the most recent to the oldest, even after loading more articles by clicking the "More" button.
 
