@@ -55,3 +55,52 @@ This means whether we hire you is based on how you do during our interview proce
 ### How can I help my application stand out?
 
 We've found that our best hires have been the most enthusiastic throughout our process. If you are very excited about working here, please feel free to go above and beyond on this assignment.
+
+
+
+## Test Case Documentation
+
+This section outlines the test cases for the project. It includes details on the test scenarios, steps to execute the tests, expected outcomes, and the tools used for testing.
+
+### Testing Strategy
+
+We have implemented the following types of tests:
+- **End-to-End Tests:** Simulate user interactions with the application to ensure that the system works as expected.
+
+**Tools Used:**
+- **Playwright:** For end-to-end testing.
+
+### Test Case Format
+
+Each test case is documented with the following details:
+- **Test Case ID:** A unique identifier for the test case.
+- **Test Description:** A brief description of the test scenario.
+- **Preconditions:** Any conditions that must be met before executing the test.
+- **Test Steps:** The steps required to execute the test.
+- **Expected Result:** The expected outcome of the test.
+- **Post-Condition:** Any actions to be taken after the test execution.
+
+###  Test Cases
+
+#### Test Case 01: Validate articles are sorted from newest to oldest.
+- **Test Case ID:** TC01
+- **Test Description:** validate that EXACTLY the first 100 articles are sorted from newest to oldest.
+- **Preconditions:**
+  -The user is on the Hacker News homepage.
+  - The test environment is properly set up with a stable internet connection.
+- **Test Steps:**
+  1. Navigate to Hacker News Homepage.
+  2. Locate the "new" link in the navigation bar and click on it to access the 'New' page, where articles are displayed in reverse chronological order
+  3. Verify that the first 30 articles displayed are sorted from newest to oldest by comparing the timestamps or identifiers associated with each article.
+  4. Scroll to the bottom of the page and click on the "More" button to load the next set of articles. Repeat this action until 100 articles have been loaded.
+  5. Confirm that the entire list of the first 100 articles remains sorted from newest to oldest after loading additional articles.
+- **Expected Result:** 
+  - The first 100 articles on the 'New' page should be displayed in descending order, from the most recent to the oldest, even after loading more articles by clicking the "More" button.
+
+- **Actual Result:**
+
+
+- **Pass/Fail Criteria:**
+Pass: If all 100 articles are correctly sorted from newest to oldest.
+Fail: If any article is out of order.
+
