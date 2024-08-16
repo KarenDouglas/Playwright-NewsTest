@@ -69,6 +69,7 @@ We have implemented the following types of tests:
 
 **Tools Used:**
 - **Playwright:** For end-to-end testing.
+- **Axe-Core/playwright:** For accessibility testing
 
 ### Test Case Format
 
@@ -82,7 +83,7 @@ Each test case is documented with the following details:
 
 ###  Test Cases
 
-#### Test Case 01: Validate articles are sorted from newest to oldest.
+#### Test Case 01: Validate articles are sorted from newest to oldest and find any easily detectable accessibility issues.
 - **Test Case ID:** TC01
 - **Test Description:** validate that EXACTLY the first 100 articles are sorted from newest to oldest.
 - **Preconditions:**
@@ -98,13 +99,23 @@ Each test case is documented with the following details:
   4. Verify that the first 30 articles displayed are sorted from newest to oldest by comparing the timestamps or identifiers associated with each article.
   5. Scroll to the bottom of the page and click on the "More" button to load the next set of articles. Repeat this action until 100 articles have been loaded.
   6. Confirm that the entire list of the first 100 articles remains sorted from newest to oldest after loading additional articles.
+  7. Using Playwright's built-in AxelBuild Accessibilty feature, scan for accessibility issues
 - **Expected Result:** 
-  - The first 100 articles on the 'New' page should be displayed in descending order, from the most recent to the oldest, even after loading more articles by clicking the "More" button.
+  - The first 100 articles on the 'New' page should be displayed in ascending order, from the most recent to the oldest, even after loading more articles by clicking the "More" button.
+  - There should be no easily detectable accessibility violations
+_ **Post Conditions:**
+- Browsers Should be closed
 
 - **Actual Result:**
+- Pages loads on Screen
+- The first 100 articles ARE sorted from least to greatest
+- 4 Accessibility Violations detected
 
 
 - **Pass/Fail Criteria:**
+Pass: If selected elements load
+Fail: If selected elements dont load
 Pass: If all 100 articles are correctly sorted from newest to oldest.
 Fail: If any article is out of order.
+Pass: If there are/arent accessibility violations, but any violations will be logged
 
