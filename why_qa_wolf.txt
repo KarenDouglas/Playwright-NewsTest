@@ -1,0 +1,9 @@
+video link: https://youtu.be/D1UahiVzOvg
+
+-----Additional Links------
+Personal GitHub: https://github.com/KarenDouglas
+LinkedIn: https://www.linkedin.com/in/karen-douglas-344974246/
+GitHub link to Challenge: https://github.com/KarenDouglas/Playwright-NewsTest;
+BMI Calculator App referenced in video:
+- GitHub: https://github.com/KarenDouglas/bmi-calculator
+- Deployed: https://bmi-calculator-challenge.netlify.app/

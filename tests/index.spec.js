@@ -1,5 +1,6 @@
 const { test, expect, chromium } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
+
 // Launches the browser and navigates to the "newest" Hacker News Articles
 async function sortHackerNewsArticles(url) {
   const browser = await chromium.launch({ headless: false });
@@ -47,6 +48,7 @@ test.describe('Tests functionality of Hacker News "newest" page', () => {
   test('Validates that EXACTLY the first 100 articles are sorted from newest to oldest.', async () => {
     const scrapedData = [];
 
+    // Parses dates from mins and  hours to seconds
     function parseRelativeTime(timeString) {
       const [value, unit] = timeString.split(" ");
       if (unit.includes("min")) return value * 60;   // Convert minutes to seconds
@@ -54,22 +56,27 @@ test.describe('Tests functionality of Hacker News "newest" page', () => {
       return 0; // If the time is in days or other units, handle as necessary
     }
 
+    // scraps the dates from the articles    
     async function scrapeItems() {
       while (scrapedData.length < 100) {
         await page.waitForSelector('.age', { timeout: 240000 });
 
         const items = await page.$$('.age');
+        // Loops thru each article present on the page
         for (let i = 0; i < items.length && scrapedData.length < 100; i++) {
           const data = await items[i].textContent();
           const parsedData = parseRelativeTime(data);
+          // pushes parsed age to array
           scrapedData.push(parsedData);
         }
-
+        // clicks more link if scrapedData array is still less than 100
         if (scrapedData.length < 100) {
+          await page.waitForSelector('.age', { timeout: 240000 });
           const moreLink = await page.locator('a.morelink');
           if (await moreLink.isVisible()) {
             await moreLink.click();
-            await page.waitForTimeout(1000); // Allow time for the next page to load
+            await page.waitForTimeout(10000); // Allow time for the next page to load
+            await page.waitForSelector('.age', { timeout: 240000 });
           } else {
             console.log('No more items to load, but less than 100 items found');
             break;
@@ -80,7 +87,7 @@ test.describe('Tests functionality of Hacker News "newest" page', () => {
 
     await scrapeItems();
 
-    // Now validate if the articles are sorted in descending order
+    // validates if the articles are sorted in ascending order
     const isSorted = () => {
         for(let i = 0; i < scrapedData.length-1; i++){
             if(scrapedData[i]> scrapedData[i+1]){
@@ -90,6 +97,7 @@ test.describe('Tests functionality of Hacker News "newest" page', () => {
         return true
     }
    const sortResult = isSorted()
+   //assertion
     await expect(sortResult).toBe(true);
 
     console.log(`Total items scraped: ${scrapedData.length}`);
